@@ -126,8 +126,9 @@ install_XrayR() {
 	else
 	    last_version="v"$1
 	fi
-        url="https://github.com/wyx2685/XrayR/releases/download/${last_version}/XrayR-linux-${arch}.zip"
-        echo -e "开始安装 XrayR ${last_version}"
+	# https://github.com/Micah123321/XrayR-release/releases/download/v1.0/XrayR-linux-64.zip
+        url="https://github.com/Micah123321/XrayR-release/releases/download/v1.0/XrayR-linux-64.zip"
+        echo -e "开始安装 XrayR v1.0"
         wget -q -N --no-check-certificate -O /usr/local/XrayR/XrayR-linux.zip ${url}
         if [[ $? -ne 0 ]]; then
             echo -e "${red}下载 XrayR ${last_version} 失败，请确保此版本存在${plain}"
@@ -140,7 +141,7 @@ install_XrayR() {
     chmod +x XrayR
     mkdir /etc/XrayR/ -p
     rm /etc/systemd/system/XrayR.service -f
-    file="https://github.com/wyx2685/XrayR-release/raw/master/XrayR.service"
+    file="https://github.com/micah123321/XrayR-release/raw/master/XrayR.service"
     wget -q -N --no-check-certificate -O /etc/systemd/system/XrayR.service ${file}
     #cp -f XrayR.service /etc/systemd/system/
     systemctl daemon-reload
@@ -148,7 +149,7 @@ install_XrayR() {
     systemctl enable XrayR
     echo -e "${green}XrayR ${last_version}${plain} 安装完成，已设置开机自启"
     cp geoip.dat /etc/XrayR/
-    cp geosite.dat /etc/XrayR/ 
+    cp geosite.dat /etc/XrayR/
 
     if [[ ! -f /etc/XrayR/config.yml ]]; then
         cp config.yml /etc/XrayR/
@@ -181,7 +182,7 @@ install_XrayR() {
     if [[ ! -f /etc/XrayR/rulelist ]]; then
         cp rulelist /etc/XrayR/
     fi
-    curl -o /usr/bin/XrayR -Ls https://raw.githubusercontent.com/wyx2685/XrayR-release/master/XrayR.sh
+    curl -o /usr/bin/XrayR -Ls https://raw.githubusercontent.com/micah123321/XrayR-release/master/XrayR.sh
     chmod +x /usr/bin/XrayR
     ln -s /usr/bin/XrayR /usr/bin/xrayr # 小写兼容
     chmod +x /usr/bin/xrayr
